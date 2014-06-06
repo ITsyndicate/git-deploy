@@ -1,0 +1,10 @@
+argparse==1.2.1
+bottle==0.12.7
+distribute==0.6.24
+dulwich==0.9.6
+funky==0.0.2
+gittle==0.3.0
+mimer==0.0.1
+paramiko==1.10.0
+pycrypto==2.6
+wsgiref==0.1.2
