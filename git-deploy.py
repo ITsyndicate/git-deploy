@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-__author__ = 'ibis'
+
 
 from bottle import request, post, run
 import os, shutil
@@ -14,7 +14,6 @@ WEBROOT = '/tmp/repos'
 @post('/deploy')
 def deploy():
     git_info = request.json
-    print git_info
     #Get info about repo
     refs = git_info['ref']
     before = git_info['before']
