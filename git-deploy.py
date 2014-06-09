@@ -2,13 +2,13 @@
 __author__ = 'ibis'
 
 from bottle import request, post, run
-import os
+import os, shutil
 from git.cmd import Git
 from git import Repo
 
 
 #Settings section
-WEBROOT = 'tmp'
+WEBROOT = '/tmp/repos'
 
 
 @post('/deploy')
@@ -31,9 +31,18 @@ def deploy():
         new_repo = Repo.clone_from(url=url,to_path=repopath)
         git = new_repo.git
         git.checkout(remote_branch)
+    elif after == u'0000000000000000000000000000000000000000':
+        #We recive push with delete branch
+        shutil.rmtree(repopath)
+    else:
+        #Update corresponding repo
+        repo = Repo(repopath)
+        origin = repo.remotes.origin
+        origin.pull()
+
 
 
 
 
 if __name__ == "__main__":
-    run(host='127.0.0.1', port=8080)
+    run(host='0.0.0.0', port=8080)
